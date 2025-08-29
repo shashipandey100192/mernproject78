@@ -1,13 +1,15 @@
 const express = require('express');
-// console.log(express);
-
 const myapp = express();
+const myrouting = require('./approuting/approut');
+require("dotenv").config();
+const port = process.env.PORT || 7500
 
-myapp.get("/",(req,res)=>{
-    res.send("this is my default response");
-})
 
 
-myapp.listen(4500,()=>{
-    console.log("server is runnning");
+
+myapp.use(myrouting);
+
+
+myapp.listen(port,()=>{
+    console.log(`server is runnning at port no:${port}`);
 })
