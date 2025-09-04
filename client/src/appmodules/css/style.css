@@ -1,0 +1,14 @@
+.myapp a
+{
+    text-decoration: none !important;
+}
+.myapp .card
+{
+    background:linear-gradient(70deg,rgb(1, 173, 173),rgb(138, 238, 252));
+     transition-duration: 300ms;
+}
+.myapp .card:hover
+{
+    transform: scale(1.1,1.1) translate(0,-3px);
+    transition-duration: 200ms;
+}
