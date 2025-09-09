@@ -1,14 +1,20 @@
 const mongoose = require('mongoose');
 
 const datapattern =new mongoose.Schema({
-    fullname:{
+    email:{
         type:String
     },
     dob:{
         type:String
     },
-    working:{
-        type:Boolean
+    gender:{
+        type:String
+    },
+    pass:{
+        type:String
+    },
+    phone:{
+        type:String
     }
 });
 

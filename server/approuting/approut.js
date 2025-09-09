@@ -20,6 +20,22 @@ myapp.get("/allworker", async (req,res)=>{
 myapp.get("/applist", async (req,res)=>{
     const appdata = await appmenu.find();
     res.send({applist:appdata,status:250,msg:"menu list"});
+});
+
+myapp.post("/createuser", async(req,res)=>{
+    const mydata = {email,dob,pass,gender,phone} = req.body;
+            if(email=="")
+            {
+                res.send({msg:"email is required"});
+            }
+            else{
+                res.send({msg:"success email"});
+            }
+            
+
+    
+
+
 })
 
 
