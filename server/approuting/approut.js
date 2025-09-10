@@ -29,7 +29,19 @@ myapp.post("/createuser", async(req,res)=>{
                 res.send({msg:"email is required"});
             }
             else{
-                res.send({msg:"success email"});
+                const myemail = await myschema.findOne({"email":email})
+                console.log(myemail);
+                if(myemail)
+                {
+                    res.send({msg:"this email is avail",exitingemail:myemail});
+                }
+                else
+                {
+                    const postdata = await myschema({email,dob,pass,gender,phone}).save();
+                    res.send({msg:"not existing email",exitingemail:postdata});
+                     
+                }
+
             }
             
 
