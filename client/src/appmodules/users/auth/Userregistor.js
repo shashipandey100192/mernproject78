@@ -1,14 +1,30 @@
 import React from 'react'
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import axios from 'axios';
+import { toast,ToastContainer } from 'react-toastify';
 
 function Userregistor() {
+    const mynav = useNavigate();
 
    const { register, handleSubmit,formState: { errors }} = useForm();
 
 const myform = (f)=>{
-        console.log(f);
+        axios.post("http://localhost:8800/createuser",f).then((d)=>{
+            console.log(d);
+            if(d.data.status===450)
+            {
+                toast.error(d.data.msg,{autoClose:2000,position:"top-left",theme:"dark"});
+            }
+            if(d.data.status===251)
+            {
+                toast.success(d.data.msg,{autoClose:2000,position:"top-left",theme:"dark"});
+                setTimeout(()=>{
+                    mynav("/usermanagement");
+                },2000)
+            }
+
+        })
             
 }
 
@@ -21,6 +37,7 @@ const myform = (f)=>{
                         <div className='row'>
                             <div className='col-12 text-center'>
                                 <p className='h3 mb-3'>Registor page</p>
+                                <ToastContainer/>
                             </div>
                             <div className='col-md-6'>
                                 <div className="mb-3">

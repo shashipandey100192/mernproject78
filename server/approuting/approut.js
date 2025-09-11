@@ -33,22 +33,44 @@ myapp.post("/createuser", async(req,res)=>{
                 console.log(myemail);
                 if(myemail)
                 {
-                    res.send({msg:"this email is avail",exitingemail:myemail});
+                    res.send({msg:"email already existing !!",exitingemail:myemail,status:450});
                 }
                 else
                 {
                     const postdata = await myschema({email,dob,pass,gender,phone}).save();
-                    res.send({msg:"not existing email",exitingemail:postdata});
+                    res.send({msg:"successfully registor",exitingemail:postdata,status:251});
                      
                 }
 
             }
-            
 
-    
+});
 
 
-})
+myapp.post("/userlogin",async(req,res)=>{
+        const logindata = {email,pass} = req.body;
+        console.log(logindata);
+        if(email=="")
+        {
+            res.send({msg:"email is required",status:420});
+        }
+        else
+        {
+            const allemailid = await myschema.findOne({"email":email});
+           
+                if(allemailid.email==email && allemailid.pass==pass)
+                {
+                    res.send({msg:"successfuly login",status:200});
+                }
+                else
+                {
+                    res.send({msg:"email and password don't match!",status:421});
+                }
+        }
+});
+   
+
+
 
 
 
