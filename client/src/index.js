@@ -22,8 +22,8 @@ root.render(
         <Route path='usermanagement' element={<Userlogin/>}></Route>
          <Route path='usermanagement/registor' element={<Userregistor/>}></Route>
          <Route path='dashboard' element={<Mainpage/>}>
-          <Route path='' element={<Homepage/>}></Route>
-          <Route path='landing' element={<Landingpage/>}></Route>
+          <Route path='' element={<Landingpage/>}></Route>
+          
 
 
          </Route>

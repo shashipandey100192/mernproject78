@@ -4,13 +4,17 @@ import Reactcharts from './Reactcharts.js';
 
 function Landingpage() {
     const [mydata, setmydate] = useState({})
-    const [a,b]=useState([]);
+    const [emp_g, sumemp_g]=useState([]);
 
     const myapi = () => {
-        axios.get('https://dummyjson.com/products').then((d) => {
-            console.log(d.data);
-            setmydate(d.data);
-            b(d.data.products);
+        axios.get('http://localhost:8800/allworker').then((d) => {
+            console.log(d.data.alldatalist);
+            setmydate(d.data.alldatalist);
+            const g = d.data.alldatalist.map((gn)=>{
+                return gn.gender
+            });
+            sumemp_g(g);
+            
         })
     }
 
@@ -26,24 +30,26 @@ function Landingpage() {
                 <div className='col-md-3'>
                     <div className="card text-bg-primary mb-3">
                         <div className="card-body">
-                            <h5 className="card-title">Total Products</h5>
-                            <h1>{mydata.total}</h1>
+                            <h5 className="card-title">Total Employee</h5>
+                            <h1>{mydata.length}</h1>
                         </div>
                     </div>
                 </div>
                 <div className='col-md-3'>
                     <div className="card text-bg-success mb-3">
                         <div className="card-body">
-                            <h5 className="card-title">Skip value </h5>
-                            <h1>{mydata.skip}</h1>
+                            <h5 className="card-title">Male Employee </h5>
+                            {/* <h1>{emp_g.length}</h1>
+                            <h1>{emp_g==="male" ? emp_g.length : "no"}</h1> */}
+                            <h1>{emp_g.length!==0 ? emp_g.filter((m)=>{return m=="Male"}).length:"po" }</h1>
                         </div>
                     </div>
                 </div>
                 <div className='col-md-3'>
                     <div className="card text-bg-warning mb-3">
                         <div className="card-body">
-                            <h5 className="card-title">Limit Data </h5>
-                           <h1>{mydata.limit}</h1>
+                            <h5 className="card-title">Female Employee </h5>
+                           <h1>{emp_g.length!==0 ? emp_g.filter((m)=>{return m=="Female"}).length:"po" }</h1>
                         </div>
                     </div>
                 </div>
@@ -52,7 +58,7 @@ function Landingpage() {
                     <div className="card text-bg-danger mb-3">
                         <div className="card-body">
                             <h5 className="card-title">Current Data</h5>
-                           <h1>{a.length}</h1>
+                           <h1>{8000}</h1>
                         </div>
                     </div>
                 </div>
