@@ -15,6 +15,9 @@ const datapattern =new mongoose.Schema({
     },
     phone:{
         type:String
+    },
+    pic:{
+        type:String
     }
 });
 

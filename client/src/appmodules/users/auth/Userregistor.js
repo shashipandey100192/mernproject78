@@ -77,6 +77,12 @@ const myform = (f)=>{
                                     </select>
                                 </div>
                             </div>
+                            <div className='col-md-6'>
+                                <div className="mb-3">
+                                    <label className="form-label">Profile Pic</label>
+                                    <input type="text"  placeholder="picture url only" className="form-control" {...register("pic")}/>
+                                </div>
+                            </div>
                             <div className='col-12 text-center'>
                                 <div className="mb-3">
                                     

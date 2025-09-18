@@ -59,3 +59,8 @@
 .scrollarea {
   overflow-y: auto;
 }
+
+.cusscroll
+{
+  overflow-x: scroll;
+}

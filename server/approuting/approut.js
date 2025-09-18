@@ -23,7 +23,7 @@ myapp.get("/applist", async (req,res)=>{
 });
 
 myapp.post("/createuser", async(req,res)=>{
-    const mydata = {email,dob,pass,gender,phone} = req.body;
+    const mydata = {email,dob,pass,gender,phone,pic} = req.body;
             if(email=="")
             {
                 res.send({msg:"email is required"});
@@ -37,7 +37,7 @@ myapp.post("/createuser", async(req,res)=>{
                 }
                 else
                 {
-                    const postdata = await myschema({email,dob,pass,gender,phone}).save();
+                    const postdata = await myschema({email,dob,pass,gender,phone,pic}).save();
                     res.send({msg:"successfully registor",exitingemail:postdata,status:251});
                      
                 }
@@ -69,6 +69,21 @@ myapp.post("/userlogin",async(req,res)=>{
         }
 });
    
+
+myapp.delete("/deleteemp/:id", async(req,res)=>{
+        const id = req.params.id;
+            const del = await myschema.findByIdAndDelete({_id:id});
+         res.send({msg:"delete successfully",status:101});
+})
+
+
+
+myapp.get("/singleemployee/:id", async(req,res)=>{
+        const id = req.params.id;
+            const single = await myschema.findById({_id:id});
+         res.send({msg:"find successfully",status:105,user:single});
+})
+
 
 
 

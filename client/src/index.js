@@ -10,6 +10,8 @@ import Userregistor from './appmodules/users/auth/Userregistor';
 import Mainpage from "./appmodules/dashboard/Mainpage";
 import Homepage from "./appmodules/dashboard/Homepage";
 import Landingpage from "./appmodules/dashboard/Landingpage";
+import Employeelist from './appmodules/dashboard/Employeelist';
+import Employeedetailspage from './appmodules/dashboard/Employeedetailspage';
 
 
 
@@ -23,6 +25,8 @@ root.render(
          <Route path='usermanagement/registor' element={<Userregistor/>}></Route>
          <Route path='dashboard' element={<Mainpage/>}>
           <Route path='' element={<Landingpage/>}></Route>
+          <Route path='employeelist' element={<Employeelist/>}></Route>
+          <Route path='employeelist/userinfo/:id' element={<Employeedetailspage/>}></Route>
           
 
 
