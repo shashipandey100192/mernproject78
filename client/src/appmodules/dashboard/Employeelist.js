@@ -71,7 +71,7 @@ const empdelete = (id)=>{
                                     <td>Otto</td>
                                     <td>@mdo</td>
                                     <td>
-                                        <button className='btn ms-2 btn-sm btn-warning'>Edit</button>
+                                        <Link to={"edituser/"+emp._id}  className='btn ms-2 btn-sm btn-warning'>Edit</Link>
                                         <Link to={"userinfo/"+emp._id} className='btn ms-2 btn-sm btn-info'>View</Link>
                                         <button className='btn ms-2 btn-sm btn-danger' onClick={()=>empdelete(emp._id)}>Del</button>
                                     </td>

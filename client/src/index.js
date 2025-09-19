@@ -12,6 +12,7 @@ import Homepage from "./appmodules/dashboard/Homepage";
 import Landingpage from "./appmodules/dashboard/Landingpage";
 import Employeelist from './appmodules/dashboard/Employeelist';
 import Employeedetailspage from './appmodules/dashboard/Employeedetailspage';
+import Employeeedit from './appmodules/dashboard/Employeeedit';
 
 
 
@@ -27,6 +28,8 @@ root.render(
           <Route path='' element={<Landingpage/>}></Route>
           <Route path='employeelist' element={<Employeelist/>}></Route>
           <Route path='employeelist/userinfo/:id' element={<Employeedetailspage/>}></Route>
+          <Route path='employeelist/edituser/:id' element={<Employeeedit/>}></Route>
+
           
 
 

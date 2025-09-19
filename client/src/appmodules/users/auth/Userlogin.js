@@ -32,12 +32,16 @@ function Userlogin() {
                 if (d.data.status === 421) {
                     toast.error(d.data.msg);
                 }
+                if (d.data.status === 320) {
+                    toast.error(d.data.msg, { position: "top-left", theme: "dark", autoClose: 2000 });
+                }
                 if (d.data.status === 200) {
                     toast.success("successfully login ", { position: "top-left", theme: "dark", autoClose: 2000 });
                     setTimeout(() => {
                         mynav("/dashboard");
                     }, 2000)
                 }
+                
 
             })
 

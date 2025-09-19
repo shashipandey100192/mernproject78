@@ -57,8 +57,12 @@ myapp.post("/userlogin",async(req,res)=>{
         else
         {
             const allemailid = await myschema.findOne({"email":email});
+                if(allemailid==null)
+                {
+                    res.send({msg:"email is not valid",status:320});
+                }
            
-                if(allemailid.email==email && allemailid.pass==pass)
+                else if(allemailid.email==email && allemailid.pass==pass)
                 {
                     res.send({msg:"successfuly login",status:200});
                 }
@@ -82,7 +86,13 @@ myapp.get("/singleemployee/:id", async(req,res)=>{
         const id = req.params.id;
             const single = await myschema.findById({_id:id});
          res.send({msg:"find successfully",status:105,user:single});
-})
+});
+
+myapp.patch("/updateemployee/:id", async (req,res)=>{
+    const id = req.params.id;
+        const single = await myschema.findByIdAndUpdate(id,req.body,{new:true});
+        res.send({msg:"update successfully",status:108,user:single});
+});
 
 
 
