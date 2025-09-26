@@ -10,12 +10,21 @@ const mynav = useNavigate();
 const {id} = useParams();
 
    const { register, handleSubmit,formState: { errors }} = useForm();
-   const [single, updatesingle] = useState({});
+
+
+   const [single,updateuser]=useState({
+    email:"",
+    pass:"",
+    dob:"",
+    phone:"",
+    gender:"",
+    pic:""
+})
 
  const employeeinfo = () => {
         axios.get(`http://localhost:8800/singleemployee/${id}`).then((d) => {
             console.log(d);
-            updatesingle(d.data.user);
+            updateuser(d.data.user);
         })
     }
 
@@ -24,9 +33,24 @@ const {id} = useParams();
     }, []);
 
 
-const myform = (f)=>{
-        axios.post(`http://localhost:8800/updateemployee/${id}`,f).then((d)=>{
+
+
+const updatefield = (e) => {
+        const { name, value } = e.target;
+        updateuser((a) => {
+            return {
+                ...a,
+                [name]: value
+            }
+        })
+    }
+
+
+
+const myform = async()=>{
+        await axios.patch(`http://localhost:8800/updateemployee/${id}`,single).then((d)=>{
             console.log(d);
+            mynav('/dashboard/employeelist');
         })
             
 }
@@ -45,14 +69,14 @@ const myform = (f)=>{
                             <div className='col-md-6'>
                                 <div className="mb-3">
                                     <label className="form-label">Email address</label>
-                                    <input type="email" className="form-control" name='email' {...register("email",{required:true})} value={single.email}/>
+                                    <input type="email" className="form-control" name='email' {...register("email",{required:true})} value={single.email} onInput={updatefield}/>
                                     {errors.email && <p className='text-danger'>email is required</p>}
                                 </div>
                             </div>
                             <div className='col-md-6'>
                                 <div className="mb-3">
                                     <label className="form-label">Password</label>
-                                    <input type="password" className="form-control" {...register("pass",{required:true,minLength:5,maxLength:12})} value={single.pass}/>
+                                    <input type="password" className="form-control" {...register("pass",{required:true,minLength:5,maxLength:12})} value={single.pass} onInput={updatefield}/>
                                     {/* {errors.pass && <p className='text-danger'>password is required</p>} */}
                                     {errors.pass?.type==="required" && <p className='text-danger'>password is required</p>}
                                     {errors.pass?.type==="minLength" && <p className='text-warning'>minimum length 5 charetue</p>}
@@ -62,19 +86,19 @@ const myform = (f)=>{
                             <div className='col-md-6'>
                                 <div className="mb-3">
                                     <label className="form-label">DOB</label>
-                                    <input type="date" className="form-control" {...register("dob")} value={single.dob}/>
+                                    <input type="date" className="form-control" {...register("dob")} value={single.dob} onChange={updatefield}/>
                                 </div>
                             </div>
                             <div className='col-md-6'>
                                 <div className="mb-3">
                                     <label className="form-label">Phone No</label>
-                                    <input type="text" className="form-control" {...register("phone")} value={single.phone}/>
+                                    <input type="text" className="form-control" {...register("phone")} value={single.phone} onInput={updatefield}/>
                                 </div>
                             </div>
                             <div className='col-md-6'>
                                 <div className="mb-3">
                                     <label className="form-label">Gender</label>
-                                    <select className='form-select' {...register("gender")} value={single.gender}>
+                                    <select className='form-select' {...register("gender")} value={single.gender} onChange={updatefield}>
                                         <option>Male</option>
                                         <option>Female</option>
                                     </select>
@@ -83,7 +107,7 @@ const myform = (f)=>{
                             <div className='col-md-6'>
                                 <div className="mb-3">
                                     <label className="form-label">Profile Pic</label>
-                                    <input type="text"  placeholder="picture url only" className="form-control" {...register("pic")} value={single.pic}/>
+                                    <input type="text"  placeholder="picture url only" className="form-control" {...register("pic")} value={single.pic} onInput={updatefield}/>
                                 </div>
                             </div>
                             <div className='col-12 text-center'>

@@ -1,4 +1,5 @@
 const express = require('express');
+const bcryptjs = require('bcryptjs');
 
 const myapp = express.Router();
 const myschema = require("../schemas/generalinfo");
@@ -37,6 +38,7 @@ myapp.post("/createuser", async(req,res)=>{
                 }
                 else
                 {
+                    
                     const postdata = await myschema({email,dob,pass,gender,phone,pic}).save();
                     res.send({msg:"successfully registor",exitingemail:postdata,status:251});
                      
