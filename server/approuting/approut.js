@@ -1,9 +1,11 @@
 const express = require('express');
-const bcryptjs = require('bcryptjs');
-
+const bcrypt = require('bcryptjs');
+const jwt  = require('jsonwebtoken');
 const myapp = express.Router();
 const myschema = require("../schemas/generalinfo");
 const appmenu = require("../schemas/appmenu");
+
+const mykey = "sdjfklsjdkfljsdklfjklsdjf";
 
 myapp.get("/",(req,res)=>{
     res.send("this is my default response sdfsdfsdf000000000000000000");
@@ -23,6 +25,7 @@ myapp.get("/applist", async (req,res)=>{
     res.send({applist:appdata,status:250,msg:"menu list"});
 });
 
+
 myapp.post("/createuser", async(req,res)=>{
     const mydata = {email,dob,pass,gender,phone,pic} = req.body;
             if(email=="")
@@ -39,7 +42,8 @@ myapp.post("/createuser", async(req,res)=>{
                 else
                 {
                     
-                    const postdata = await myschema({email,dob,pass,gender,phone,pic}).save();
+                    const haspass = await bcrypt.hash(pass,10);
+                    const postdata = await myschema({email,dob,pass:haspass,gender,phone,pic}).save();
                     res.send({msg:"successfully registor",exitingemail:postdata,status:251});
                      
                 }
@@ -64,9 +68,13 @@ myapp.post("/userlogin",async(req,res)=>{
                     res.send({msg:"email is not valid",status:320});
                 }
            
-                else if(allemailid.email==email && allemailid.pass==pass)
+                // else if(allemailid.email==email && allemailid.pass==pass)
+                else if(allemailid.email==email && bcrypt.compare(pass,allemailid.pass))
                 {
-                    res.send({msg:"successfuly login",status:200});
+                     const token = jwt.sign({ email: allemailid.email, pass: allemailid.pass}, mykey, {
+                            expiresIn: '1h'
+                    });
+                    res.send({msg:"successfuly login",status:200,mytoken:token});
                 }
                 else
                 {
