@@ -1,11 +1,13 @@
 const express = require('express');
+const verifyToken = require('../approuting/medialwere/backauth');
 const bcrypt = require('bcryptjs');
 const jwt  = require('jsonwebtoken');
 const myapp = express.Router();
 const myschema = require("../schemas/generalinfo");
 const appmenu = require("../schemas/appmenu");
+require('dotenv').config();
 
-const mykey = "sdjfklsjdkfljsdklfjklsdjf";
+const mykey = process.env.MYSECKEY;
 
 myapp.get("/",(req,res)=>{
     res.send("this is my default response sdfsdfsdf000000000000000000");
@@ -74,6 +76,7 @@ myapp.post("/userlogin",async(req,res)=>{
                      const token = jwt.sign({ email: allemailid.email, pass: allemailid.pass}, mykey, {
                             expiresIn: '1h'
                     });
+                    
                     res.send({msg:"successfuly login",status:200,mytoken:token});
                 }
                 else
