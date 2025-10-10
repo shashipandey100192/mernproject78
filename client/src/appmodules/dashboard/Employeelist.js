@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 import { Link } from 'react-router-dom';
+import { baseurl } from '../sharecomponents/Myservisce';
 
 
 function Employeelist() {
@@ -8,11 +9,7 @@ function Employeelist() {
     const [employee, updateemployee] = useState([]);
 
     const allemp = async () => {
-        await axios.get("http://localhost:8800/allworker", {
-            headers: {
-                Authorization: `Bearer ${token}`
-            }
-        }).then((emp) => {
+        await axios.get(`${baseurl}/allworker`).then((emp) => {
             updateemployee(emp.data.alldatalist);
             console.log(emp);
         })
@@ -25,7 +22,7 @@ function Employeelist() {
 
     const empdelete = (id) => {
         console.log(id);
-        axios.delete(`http://localhost:8800/deleteemp/${id}`).then((r) => {
+        axios.delete(`${baseurl}/deleteemp/${id}`).then((r) => {
             console.log(r);
             if (r.data.status === 101) {
                 alert(r.data.msg);

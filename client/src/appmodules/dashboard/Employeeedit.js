@@ -3,6 +3,7 @@ import { Link, useNavigate, useParams } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import axios from 'axios';
 import { toast,ToastContainer } from 'react-toastify';
+import { baseurl } from '../sharecomponents/Myservisce';
 
 
 function Employeeedit() {
@@ -22,7 +23,7 @@ const {id} = useParams();
 })
 
  const employeeinfo = () => {
-        axios.get(`http://localhost:8800/singleemployee/${id}`).then((d) => {
+        axios.get(`${baseurl}/singleemployee/${id}`).then((d) => {
             console.log(d);
             updateuser(d.data.user);
         })
@@ -48,7 +49,7 @@ const updatefield = (e) => {
 
 
 const myform = async()=>{
-        await axios.patch(`http://localhost:8800/updateemployee/${id}`,single).then((d)=>{
+        await axios.patch(`${baseurl}/updateemployee/${id}`,single).then((d)=>{
             console.log(d);
             mynav('/dashboard/employeelist');
         })

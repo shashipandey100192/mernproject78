@@ -3,6 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import axios from 'axios';
 import { toast,ToastContainer } from 'react-toastify';
+import { baseurl } from '../../sharecomponents/Myservisce';
 
 function Userregistor() {
     const mynav = useNavigate();
@@ -10,7 +11,7 @@ function Userregistor() {
    const { register, handleSubmit,formState: { errors }} = useForm();
 
 const myform = (f)=>{
-        axios.post("http://localhost:8800/createuser",f).then((d)=>{
+        axios.post(`${baseurl}/createuser`,f).then((d)=>{
             console.log(d);
             if(d.data.status===450)
             {

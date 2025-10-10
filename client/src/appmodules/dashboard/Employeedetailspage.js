@@ -1,11 +1,14 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 import { Link, useParams } from 'react-router-dom'
+import { baseurl } from '../sharecomponents/Myservisce';
+
+
 function Employeedetailspage() {
     const { id } = useParams();
     const [single, updatesingle] = useState({});
     const employeeinfo = () => {
-        axios.get(`http://localhost:8800/singleemployee/${id}`).then((d) => {
+        axios.get(`${baseurl}/singleemployee/${id}`).then((d) => {
             console.log(d);
             updatesingle(d.data.user);
         })

@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import Reactcharts from './Reactcharts.js';
+import { baseurl } from '../sharecomponents/Myservisce.js';
 
 function Landingpage() {
     const [mydata, setmydate] = useState({})
     const [emp_g, sumemp_g]=useState([]);
 
     const myapi = () => {
-        axios.get('http://localhost:8800/allworker').then((d) => {
+        axios.get(`${baseurl}/allworker`).then((d) => {
             console.log(d.data.alldatalist);
             setmydate(d.data.alldatalist);
             const g = d.data.alldatalist.map((gn)=>{
