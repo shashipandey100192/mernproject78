@@ -1,17 +1,18 @@
+'Access-Control-Allow-Origin'
 const express = require('express');
-const jwt = require('jsonwebtoken');
-const myapp = express();
 const cors = require('cors');
-const myrouting = require('./approuting/approut');
 require("dotenv").config();
 require("./database/mydb");
+const myrouting = require('./approuting/approut');
+const myapp = express();
+
+
 const port = process.env.PORT || 7500
 
 
 
-
-myapp.use(express.json());
 myapp.use(cors());
+myapp.use(express.json());
 myapp.use(myrouting);
 
 

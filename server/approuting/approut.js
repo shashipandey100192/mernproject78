@@ -1,13 +1,14 @@
+'Access-Control-Allow-Origin'
 const express = require('express');
 const verifyToken = require('../approuting/medialwere/backauth');
 const bcrypt = require('bcryptjs');
 const jwt  = require('jsonwebtoken');
-const myapp = express.Router();
-const myschema = require("../schemas/generalinfo");
 const appmenu = require("../schemas/appmenu");
-require('dotenv').config();
+const myschema = require("../schemas/generalinfo");
+const myapp = express.Router();
 
-const mykey = process.env.MYSECKEY;
+
+const mykey = "mernfullstack";
 
 myapp.get("/",(req,res)=>{
     res.send("this is my default response sdfsdfsdf000000000000000000");
@@ -17,10 +18,7 @@ myapp.get("/about",(req,res)=>{
     res.send("this is about page");
 });
 
-myapp.get("/allworker", async (req,res)=>{
-    const alldata = await myschema.find();
-    res.send({alldatalist:alldata,status:250,msg:"all worker list"});
-});
+
 
 myapp.get("/applist", async (req,res)=>{
     const appdata = await appmenu.find();
@@ -77,6 +75,8 @@ myapp.post("/userlogin",async(req,res)=>{
                             expiresIn: '1h'
                     });
                     
+                    res.set("Authorization", `Bearer ${token}`);
+                    
                     res.send({msg:"successfuly login",status:200,mytoken:token});
                 }
                 else
@@ -108,7 +108,10 @@ myapp.patch("/updateemployee/:id", async (req,res)=>{
 });
 
 
-
+myapp.get("/allworker", async (req,res)=>{
+    const alldata = await myschema.find();
+    res.send({alldatalist:alldata,status:250,msg:"all worker list"});
+});
 
 
 

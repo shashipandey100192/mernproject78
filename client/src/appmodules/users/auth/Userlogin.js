@@ -22,12 +22,12 @@ function Userlogin() {
         })
     }
 
-    const validationlogin = () => {
+    const validationlogin = async () => {
         if (login.email === "" || login.pass === "") {
             toast.warning("your email and password is blank", { position: "top-left", theme: "dark", autoClose: 2000 });
         }
         else {
-            axios.post("http://localhost:8800/userlogin", login).then((d) => {
+           await axios.post("http://localhost:8800/userlogin", login).then((d) => {
                 console.log(d);
                 if (d.data.status === 421) {
                     toast.error(d.data.msg);
@@ -36,6 +36,7 @@ function Userlogin() {
                     toast.error(d.data.msg, { position: "top-left", theme: "dark", autoClose: 2000 });
                 }
                 if (d.data.status === 200) {
+                    localStorage.setItem("settoken",d.data.mytoken);
                     toast.success("successfully login ", { position: "top-left", theme: "dark", autoClose: 2000 });
                     setTimeout(() => {
                         mynav("/dashboard");
