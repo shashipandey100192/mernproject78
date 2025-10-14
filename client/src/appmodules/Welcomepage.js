@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom';
 import { FaUserAlt } from "react-icons/fa";
 import axios from 'axios';
+import { baseurl } from './sharecomponents/Myservisce';
 
 
 function Welcomepage() {
@@ -9,7 +10,7 @@ function Welcomepage() {
     const [appmenu, setappment] = useState([]);
 
     const appment = async () => {
-        await axios.get('http://localhost:8800/applist').then((d) => {
+        await axios.get(`${baseurl}/applist`).then((d) => {
             setappment(d.data.applist);
             console.log(d.data.applist);
         })
