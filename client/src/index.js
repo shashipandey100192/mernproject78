@@ -8,7 +8,6 @@ import "./appmodules/css/style.css";
 import Userlogin from './appmodules/users/auth/Userlogin';
 import Userregistor from './appmodules/users/auth/Userregistor';
 import Mainpage from "./appmodules/dashboard/Mainpage";
-import Homepage from "./appmodules/dashboard/Homepage";
 import Landingpage from "./appmodules/dashboard/Landingpage";
 import Employeelist from './appmodules/dashboard/Employeelist';
 import Employeedetailspage from './appmodules/dashboard/Employeedetailspage';

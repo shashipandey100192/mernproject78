@@ -29,7 +29,7 @@ function Userlogin() {
         }
         else {
            await axios.post(`${baseurl}/userlogin`, login).then((d) => {
-                console.log(d);
+                // console.log(d);
                 if (d.data.status === 421) {
                     toast.error(d.data.msg);
                 }

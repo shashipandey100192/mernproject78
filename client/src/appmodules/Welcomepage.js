@@ -12,7 +12,7 @@ function Welcomepage() {
     const appment = async () => {
         await axios.get(`${baseurl}/applist`).then((d) => {
             setappment(d.data.applist);
-            console.log(d.data.applist);
+            // console.log(d.data.applist);
         })
     }
 

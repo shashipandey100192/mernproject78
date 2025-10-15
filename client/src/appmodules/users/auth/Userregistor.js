@@ -12,7 +12,7 @@ function Userregistor() {
 
 const myform = (f)=>{
         axios.post(`${baseurl}/createuser`,f).then((d)=>{
-            console.log(d);
+            // console.log(d);
             if(d.data.status===450)
             {
                 toast.error(d.data.msg,{autoClose:2000,position:"top-left",theme:"dark"});

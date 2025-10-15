@@ -11,7 +11,7 @@ function Employeelist() {
     const allemp = async () => {
         await axios.get(`${baseurl}/allworker`).then((emp) => {
             updateemployee(emp.data.alldatalist);
-            console.log(emp);
+            // console.log(emp);
         })
     }
 
@@ -21,9 +21,9 @@ function Employeelist() {
 
 
     const empdelete = (id) => {
-        console.log(id);
+        // console.log(id);
         axios.delete(`${baseurl}/deleteemp/${id}`).then((r) => {
-            console.log(r);
+            // console.log(r);
             if (r.data.status === 101) {
                 alert(r.data.msg);
                 allemp();

@@ -2,7 +2,7 @@ import React,{useEffect,useState} from 'react'
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import axios from 'axios';
-import { toast,ToastContainer } from 'react-toastify';
+import {ToastContainer } from 'react-toastify';
 import { baseurl } from '../sharecomponents/Myservisce';
 
 
@@ -31,7 +31,7 @@ const {id} = useParams();
 
   useEffect(() => {
         employeeinfo();
-    }, []);
+    },[]);
 
 
 

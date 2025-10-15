@@ -9,7 +9,7 @@ function Landingpage() {
 
     const myapi = () => {
         axios.get(`${baseurl}/allworker`).then((d) => {
-            console.log(d.data.alldatalist);
+            // console.log(d.data.alldatalist);
             setmydate(d.data.alldatalist);
             const g = d.data.alldatalist.map((gn)=>{
                 return gn.gender
@@ -42,7 +42,7 @@ function Landingpage() {
                             <h5 className="card-title">Male Employee </h5>
                             {/* <h1>{emp_g.length}</h1>
                             <h1>{emp_g==="male" ? emp_g.length : "no"}</h1> */}
-                            <h1>{emp_g.length!==0 ? emp_g.filter((m)=>{return m=="Male"}).length:"po" }</h1>
+                            <h1>{emp_g.length!==0 ? emp_g.filter((m)=>{return m==="Male"}).length:"po" }</h1>
                         </div>
                     </div>
                 </div>
@@ -50,7 +50,7 @@ function Landingpage() {
                     <div className="card text-bg-warning mb-3">
                         <div className="card-body">
                             <h5 className="card-title">Female Employee </h5>
-                           <h1>{emp_g.length!==0 ? emp_g.filter((m)=>{return m=="Female"}).length:"po" }</h1>
+                           <h1>{emp_g.length!==0 ? emp_g.filter((m)=>{return m==="Female"}).length:"po" }</h1>
                         </div>
                     </div>
                 </div>

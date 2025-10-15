@@ -1,5 +1,5 @@
 import React,{Fragment, useEffect,useState} from 'react'
-import { BarChart, Bar, Rectangle, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
+import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 import axios from 'axios';
 
 
@@ -11,7 +11,7 @@ const [filterdata,updatefilter]=useState([]);
 
   const myapi = () => {
     axios.get('https://dummyjson.com/products').then((d) => {
-      console.log(d.data.products);
+      // console.log(d.data.products);
       setmydate(d.data.products);
       updatefilter(d.data.products);
 
