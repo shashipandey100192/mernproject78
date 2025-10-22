@@ -1,17 +1,22 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { baseurl } from '../sharecomponents/Myservisce';
 
 
 function Employeelist() {
+    const mynav = useNavigate();
 
     const [employee, updateemployee] = useState([]);
 
     const allemp = async () => {
-        await axios.get(`${baseurl}/allworker`).then((emp) => {
+        const token = localStorage.getItem("settoken");
+        await axios.get(`${baseurl}/allworker`,{
+             headers: {
+                Authorization: `Bearer ${token}`
+            }
+        }).then((emp) => {
             updateemployee(emp.data.alldatalist);
-            // console.log(emp);
         })
     }
 
@@ -21,12 +26,22 @@ function Employeelist() {
 
 
     const empdelete = (id) => {
-        // console.log(id);
-        axios.delete(`${baseurl}/deleteemp/${id}`).then((r) => {
+        const token = localStorage.getItem("settoken");
+        axios.delete(`${baseurl}/deleteemp/${id}`,{
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        }).then((r) => {
             // console.log(r);
             if (r.data.status === 101) {
                 alert(r.data.msg);
                 allemp();
+            }
+        }).catch((error)=>{
+            console.log(error);
+            if(error.status===420)
+            {
+                mynav("/");
             }
         })
     }

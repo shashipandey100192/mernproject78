@@ -5,17 +5,21 @@ import { baseurl } from '../sharecomponents/Myservisce.js';
 
 function Landingpage() {
     const [mydata, setmydate] = useState({})
-    const [emp_g, sumemp_g]=useState([]);
+    const [emp_g, sumemp_g] = useState([]);
 
     const myapi = () => {
-        axios.get(`${baseurl}/allworker`).then((d) => {
-            // console.log(d.data.alldatalist);
+        const token = localStorage.getItem("settoken");
+        axios.get(`${baseurl}/allworker`, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        }).then((d) => {
             setmydate(d.data.alldatalist);
-            const g = d.data.alldatalist.map((gn)=>{
+            const g = d.data.alldatalist.map((gn) => {
                 return gn.gender
             });
             sumemp_g(g);
-            
+
         })
     }
 
@@ -42,7 +46,7 @@ function Landingpage() {
                             <h5 className="card-title">Male Employee </h5>
                             {/* <h1>{emp_g.length}</h1>
                             <h1>{emp_g==="male" ? emp_g.length : "no"}</h1> */}
-                            <h1>{emp_g.length!==0 ? emp_g.filter((m)=>{return m==="Male"}).length:"po" }</h1>
+                            <h1>{emp_g.length !== 0 ? emp_g.filter((m) => { return m === "Male" }).length : "po"}</h1>
                         </div>
                     </div>
                 </div>
@@ -50,7 +54,7 @@ function Landingpage() {
                     <div className="card text-bg-warning mb-3">
                         <div className="card-body">
                             <h5 className="card-title">Female Employee </h5>
-                           <h1>{emp_g.length!==0 ? emp_g.filter((m)=>{return m==="Female"}).length:"po" }</h1>
+                            <h1>{emp_g.length !== 0 ? emp_g.filter((m) => { return m === "Female" }).length : "po"}</h1>
                         </div>
                     </div>
                 </div>
@@ -59,7 +63,7 @@ function Landingpage() {
                     <div className="card text-bg-danger mb-3">
                         <div className="card-body">
                             <h5 className="card-title">Current Data</h5>
-                           <h1>{8000}</h1>
+                            <h1>{8000}</h1>
                         </div>
                     </div>
                 </div>
@@ -68,8 +72,8 @@ function Landingpage() {
                     <div className="card bg-dark mb-3">
                         <div className="card-body">
                             <h5 className="card-title">Total </h5>
-                            <div style={{width:'100%',height:300}}>
-                            <Reactcharts></Reactcharts>
+                            <div style={{ width: '100%', height: 300 }}>
+                                <Reactcharts></Reactcharts>
                             </div>
                         </div>
                     </div>
@@ -91,7 +95,7 @@ function Landingpage() {
                         </div>
                     </div>
                 </div>
-                
+
             </div>
         </div>
     )

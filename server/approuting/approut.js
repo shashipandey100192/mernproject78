@@ -1,10 +1,11 @@
 'Access-Control-Allow-Origin'
 const express = require('express');
-const verifyToken = require('../approuting/medialwere/backauth');
 const bcrypt = require('bcryptjs');
 const jwt  = require('jsonwebtoken');
+
 const appmenu = require("../schemas/appmenu");
 const myschema = require("../schemas/generalinfo");
+const verifyToken = require('../approuting/medialwere/backauth');
 const myapp = express.Router();
 
 
@@ -75,7 +76,7 @@ myapp.post("/userlogin",async(req,res)=>{
                             expiresIn: '1h'
                     });
                     
-                    res.set("Authorization", `Bearer ${token}`);
+                    res.set("authorization", `Bearer ${token}`);
                     
                     res.send({msg:"successfuly login",status:200,mytoken:token});
                 }
@@ -87,7 +88,7 @@ myapp.post("/userlogin",async(req,res)=>{
 });
    
 
-myapp.delete("/deleteemp/:id", async(req,res)=>{
+myapp.delete("/deleteemp/:id", verifyToken, async(req,res)=>{
         const id = req.params.id;
             const del = await myschema.findByIdAndDelete({_id:id});
          res.send({msg:"delete successfully",status:101});
@@ -108,7 +109,7 @@ myapp.patch("/updateemployee/:id", async (req,res)=>{
 });
 
 
-myapp.get("/allworker", async (req,res)=>{
+myapp.get("/allworker",verifyToken, async (req,res)=>{
     const alldata = await myschema.find();
     res.send({alldatalist:alldata,status:250,msg:"all worker list"});
 });

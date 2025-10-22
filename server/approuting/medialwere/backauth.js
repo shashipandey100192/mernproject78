@@ -1,13 +1,13 @@
 const jwt = require('jsonwebtoken');
 const mykey = "mernfullstack";
 
-function verifyToken(req, res, next) {
-    // let token = req.headers['x-access-token'] || req.headers['authorization'];
-    const token = req.headers["authorization"] || req.get("Authorization");
+ async function verifyToken(req, res, next) {
+    let token = req.headers.authorization;
+    // const token = await req.cookies?.accessToken || req.header("Authorization")?.replace("Bearer ", "")
     console.log(`mytoken:${token}`);
 
     if (!token) {
-        return res.status(403).send('Token is required');
+        return res.status(401).send('Token is requiredeeeeeeeeeeee');
     }
 
     if (token.startsWith('Bearer ')) {
