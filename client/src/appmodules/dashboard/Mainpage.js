@@ -1,7 +1,9 @@
 import React, { Fragment } from 'react'
 import Headerpage from '../sharecomponents/Headerpage';
 import Sidebarpage from '../sharecomponents/Sidebarpage';
-import { Outlet } from 'react-router-dom'
+import { Outlet } from 'react-router-dom';
+import ChatBot from "react-chatbotify";
+import { customdesign } from './Modeldesign';
 
 function Mainpage() {
   return (
@@ -15,6 +17,7 @@ function Mainpage() {
         </div>
           <div className='col-md-10 border' style={{height:'90vh'}}>
           <Outlet></Outlet>
+          <ChatBot settings={customdesign}/>
         </div>
         
 
